@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timer Website</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Timer Website</h1>
+  </header>
+  
+  <main>
+    <section id="description">
+      <h2>About This Timer</h2>
+      <p>This is a 20-minute timer designed to help you follow the 20-20-20 rule for eye strain relief. Every 20 minutes, take a 20-second break and look at something 20 feet away.</p>
+    </section>
+
+    <section id="timer-container">
+      <div class="button-group">
+        <button id="startBtn">Start Timer</button>
+        <button id="pauseBtn">Pause Timer</button>
+        <button id="resetBtn">Reset Timer</button>
+      </div>
+      <div id="timerDisplay">00:00</div>
+      <button id="notificationToggle">Use Silent Notifications</button>
+    </section>
+
+    <div id="messageModal" class="modal">
+      <div class="modal-content">
+        <h2>Time's up!</h2>
+        <p>20 minutes have passed. Please look away</p>
+        <button id="okBtn">OK</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="timer.js"></script>
+</body>
+</html>
