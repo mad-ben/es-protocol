@@ -12,7 +12,7 @@ let pausedTime = 0;
 let isPaused = false;
 const TIMER_DURATION = 1200000; // 1200000 - 20 minutes in milliseconds
 let originalTitle = document.title;
-let notificationSound = new Audio('../resource/mgs-alert.mp3');; // Replace with actual sound file URL
+let notificationSound = new Audio('./resource/mgs-alert.mp3'); // Replace with actual sound file URL
 let titleAnimationInterval;
 let useSilentNotifications = false;
 
