@@ -5,18 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ESP - Save Your Eyes</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="resource/icon.png">
 </head>
 <body>
   <header>
-    <h1>Reduce Digital Eye Eye-Strain</h1>
+    <h1>Reduce Digital Eye-Strain</h1>
   </header>
   
   <main>
-    <section id="description">
-      <p>The 20-20-20 rule is a simple and effective technique to help developers and computer users reduce eye strain and fatigue from prolonged screen time. 
-        The rule states that every 20 minutes, you should look at something 20 feet (6 meters) away for at least 20 seconds</p>
-    </section>
-
     <section id="timer-container">
       <div class="button-group">
         <button id="startBtn">Start Timer</button>
@@ -27,6 +24,23 @@
       <button id="notificationToggle">Use Silent Notifications</button>
     </section>
 
+    <section id="description-20rule">
+      <h2>20-20-20 Rule</h2>
+      <p>The 20-20-20 rule is a simple and effective technique to help developers and computer users reduce eye strain and fatigue from prolonged screen time. 
+        The rule states that every 20 minutes, you should look at something 20 feet (6 meters) away for at least 20 seconds. Longer breaks are recommended.</p>
+    </section>
+    
+    <section id="recommendations">
+      <h2>Longer Breaks May Be More Effective</h2>
+      <p>While the 20-20-20 rule can be helpful, some scientists suggest that breaks longer than 20 seconds may be more effective for reducing eye strain and fatigue. 
+         Researchers have found that breaks of 5 minutes or more per hour may be needed to have a meaningful impact on reducing the accommodative and vergence responses that occur during prolonged near work.</p>
+    
+      <h2>The Importance of Outdoor Time</h2>
+      <p>In addition to regular screen breaks, spending time outdoors is also crucial for maintaining healthy vision. Exposure to natural light triggers the release of dopamine in the eyes, which has been shown to have a protective effect against the development and progression of myopia (nearsightedness).
+         Getting outside for even just a short walk or spending time in natural settings can help counteract the effects of prolonged indoor and screen time. Incorporating both regular screen breaks and increased outdoor time into your daily routine can be an effective strategy for supporting long-term eye health.</p>
+    </section>
+
+    
     <div id="messageModal" class="modal">
       <div class="modal-content">
         <h2>Time's up!</h2>
@@ -37,10 +51,21 @@
   </main>
 
   <footer>
-    <p>&copy; 2024 Eye Saving Protocol. MIT License. All rights reserved.</p>
+    <p>&copy; 2024 Eye Saving Protocol. MIT License. All rights reserved. Site saves your preference regarding notification profile.</p>
     <p>Contact: andriy.kalysh@gmail.com</p>
   </footer>
 
+  <noscript>
+    <p>This application requires JavaScript to function properly. Please enable JavaScript in your browser settings.</p>
+  </noscript>
+
+  <script>
+    if (typeof(Worker) === "undefined") {
+      console.warn('Web Workers are not supported in this browser. The timer may not function correctly when the tab is inactive.');
+    }
+  </script>
+
+  <!-- <script src="timerWorker.js" ></script> -->
   <script src="timer.js"></script>
 </body>
 </html>

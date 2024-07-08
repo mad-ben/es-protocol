@@ -1,5 +1,46 @@
 #Digital Eye-Strain Protocol
- 
+
+ESP - Eye Saving Protocol v1.0.0 Release Notes
+
+Key Features:
+
+1. 20-20-20 Timer:
+   - Customizable timer set for 20-minute intervals
+   - Start, pause, and reset functionality
+   - Continues running even when the browser tab is inactive
+
+2. Notification System:
+   - Visual notifications with tab title animation
+   - Audio notifications with a customizable sound
+   - Option to switch between silent and audible notifications
+
+3. Educational Content:
+   - Information about the 20-20-20 rule
+   - Recommendations for longer breaks
+   - Emphasis on the importance of outdoor time for eye health
+
+4. User Preference Saving:
+   - Remembers user's notification preference (silent/audible) between sessions
+
+5. Responsive Design:
+   - Works on various screen sizes and devices
+
+Technical Highlights:
+
+- Utilizes Web Workers for reliable background timer operation
+- Implements the Web Audio API for consistent sound playback
+- Uses local storage for saving user preferences
+- Supports modern browsers with fallback warnings for unsupported features
+
+Known Limitations:
+
+- Requires JavaScript to be enabled
+- Some features may not work correctly in older browsers that don't support Web Workers
+
+We hope this tool helps you maintain better eye health during extended computer use.
+
+Thank you for using ESP - Eye Saving Protocol!
+
 #License
 
 MIT License
