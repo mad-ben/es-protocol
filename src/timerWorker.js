@@ -1,4 +1,4 @@
-const TIMER_DURATION = 5000; // 5 seconds for testing, change to 1200000 for 20 minutes
+const TIMER_DURATION = 1200000; // 5 seconds for testing, change to 1200000 for 20 minutes
 
 let startTime;
 let pausedTime = 0;
