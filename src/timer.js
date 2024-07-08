@@ -10,11 +10,58 @@ let animationFrameId;
 let startTime;
 let pausedTime = 0;
 let isPaused = false;
-const TIMER_DURATION = 1200000; // 20 minutes in milliseconds
+const TIMER_DURATION = 1200000; // 1200000 - 20 minutes in milliseconds
 let originalTitle = document.title;
-let notificationSound = new Audio('https://example.com/path/to/notification-sound.mp3'); // Replace with actual sound file URL
+let notificationSound = new Audio('../resource/mgs-alert.mp3');; // Replace with actual sound file URL
 let titleAnimationInterval;
 let useSilentNotifications = false;
+
+function setCookie(name, value, days) {
+  const date = new Date();
+  date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+  const expires = "expires=" + date.toUTCString();
+  document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+
+function getCookie(name) {
+  const cookieName = name + "=";
+  const decodedCookie = decodeURIComponent(document.cookie);
+  const cookieArray = decodedCookie.split(';');
+  for (let i = 0; i < cookieArray.length; i++) {
+      let cookie = cookieArray[i];
+      while (cookie.charAt(0) === ' ') {
+          cookie = cookie.substring(1);
+      }
+      if (cookie.indexOf(cookieName) === 0) {
+          return cookie.substring(cookieName.length, cookie.length);
+      }
+  }
+  return "";
+}
+
+function checkCookieConsent() {
+  if (getCookie("cookieConsent") !== "true") {
+      const consent = confirm("This website uses cookies to save your notification preferences. Do you consent to the use of cookies?");
+      if (consent) {
+          setCookie("cookieConsent", "true", 365);
+          loadNotificationPreference();
+      }
+  } else {
+      loadNotificationPreference();
+  }
+}
+
+// Modify loadNotificationPreference function
+function loadNotificationPreference() {
+  if (getCookie("cookieConsent") === "true") {
+      const preference = getCookie("useSilentNotifications");
+      if (preference !== "") {
+          useSilentNotifications = preference === "true";
+          notificationToggle.textContent = useSilentNotifications ? 
+              "Use Explicit Notifications" : "Use Silent Notifications";
+      }
+  }
+}
 
 function updateTimer() {
   if (isPaused) return;
@@ -36,11 +83,11 @@ function updateTimer() {
 
 function timerComplete() {
   pauseTimer();
+  startTitleAnimation(); // Always start title animation
   if (useSilentNotifications) {
     sendNotification();
-    startTitleAnimation();
-    playNotificationSound();
   } else {
+    playNotificationSound(); // Always play sound
     showMessageModal();
   }
 }
@@ -70,7 +117,7 @@ function startTitleAnimation() {
     document.title = message.substring(position) + message.substring(0, position);
     position++;
     if (position > message.length) position = 0;
-  }, 250); // Adjust speed of animation here
+  }, 10); // Adjust speed of animation here
 }
 
 function stopTitleAnimation() {
@@ -125,6 +172,9 @@ function toggleNotificationMethod() {
   useSilentNotifications = !useSilentNotifications;
   notificationToggle.textContent = useSilentNotifications ? 
     "Use Explicit Notifications" : "Use Silent Notifications";
+
+    // Save preference to cookie
+    setCookie("useSilentNotifications", useSilentNotifications, 365);  // Saves for 1 year 
   
   if (useSilentNotifications && "Notification" in window) {
     Notification.requestPermission();
@@ -143,3 +193,4 @@ notificationToggle.addEventListener('click', toggleNotificationMethod);
 // Initialize button states
 pauseBtn.disabled = true;
 resetBtn.disabled = true;
+checkCookieConsent();
