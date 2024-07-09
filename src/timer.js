@@ -6,6 +6,7 @@ const timerDisplay = document.getElementById('timerDisplay');
 const messageModal = document.getElementById('messageModal');
 const okBtn = document.getElementById('okBtn');
 const notificationToggle = document.getElementById('notificationToggle');
+const testSoundBtn = document.getElementById('testSoundBtn');
 
 // Global variables
 const worker = new Worker('timerWorker.js');
@@ -22,12 +23,12 @@ let isTimerComplete = false;
 function loadAudio() {
   audioContext = new (window.AudioContext || window.webkitAudioContext)();
   fetch('./resource/mgs-alert.mp3')
-    .then(response => response.arrayBuffer())
-    .then(arrayBuffer => audioContext.decodeAudioData(arrayBuffer))
-    .then(decodedAudio => {
-      audioBuffer = decodedAudio;
-    })
-    .catch(error => console.error('Error loading audio:', error));
+  .then(response => response.arrayBuffer())
+  .then(arrayBuffer => audioContext.decodeAudioData(arrayBuffer))
+  .then(decodedAudio => {
+    audioBuffer = decodedAudio;
+  })
+  .catch(error => console.error('Error loading audio:', error));
 }
 
 function playNotificationSound() {
@@ -42,6 +43,15 @@ function playNotificationSound() {
 function startRepeatedSound() {
   playNotificationSound();
   soundInterval = setInterval(playNotificationSound, 5000); // Play every 5 seconds
+}
+
+function playTestSound() {
+  if (audioContext && audioBuffer) {
+    playNotificationSound();
+  } else {
+    console.error('Audio not loaded yet');
+    alert('Audio not loaded yet. Please wait a moment and try again.');
+  }
 }
 
 // Notification functions
@@ -172,6 +182,8 @@ document.addEventListener('visibilitychange', function() {
   }
 });
 
+testSoundBtn.addEventListener('click', playTestSound);
+
 worker.onmessage = function(e) {
   if (e.data.type === 'update') {
     timerDisplay.textContent = e.data.time;
@@ -185,6 +197,7 @@ function init() {
   updateButtonStates(false, true, true);
   loadNotificationPreference();
   loadAudio();
+  testSoundBtn.addEventListener('click', playTestSound);
 }
 
 init();

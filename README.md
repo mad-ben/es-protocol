@@ -1,5 +1,10 @@
 #Digital Eye-Strain Protocol
 
+ESP - Eye Saving Protocol v1.0.1 Release Notes
+
+1. Test Sound:
+   - Added test sound alert button
+
 ESP - Eye Saving Protocol v1.0.0 Release Notes
 
 Key Features:
