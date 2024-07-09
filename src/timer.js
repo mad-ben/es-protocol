@@ -16,6 +16,7 @@ let soundInterval;
 let titleAnimationInterval;
 let useSilentNotifications = false;
 let showOrangeDot = false;
+let isTimerComplete = false;
 
 // Audio functions
 function loadAudio() {
@@ -114,6 +115,8 @@ function resetTimer() {
   clearInterval(soundInterval);
   updateButtonStates(false, true, true);
   messageModal.style.display = 'none';
+  isTimerComplete = false;
+  timerDisplay.textContent = '00:00'; // Ensure the display is reset
 }
 
 function updateButtonStates(startDisabled, pauseDisabled, resetDisabled) {
@@ -124,6 +127,7 @@ function updateButtonStates(startDisabled, pauseDisabled, resetDisabled) {
 
 function timerComplete() {
   pauseTimer();
+  isTimerComplete = true;
   startTitleAnimation();
   if (useSilentNotifications) {
     sendNotification();
@@ -157,11 +161,12 @@ okBtn.addEventListener('click', () => {
   messageModal.style.display = 'none';
   clearInterval(soundInterval);
   resetTimer();
+  startTimer(); // restart the timer
 });
 notificationToggle.addEventListener('click', toggleNotificationMethod);
 
 document.addEventListener('visibilitychange', function() {
-  if (!document.hidden && soundInterval) {
+  if (!document.hidden && soundInterval && isTimerComplete) {
     showMessageModal();
     clearInterval(soundInterval);
   }
