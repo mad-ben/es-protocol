@@ -1,4 +1,4 @@
-const TIMER_DURATION = 1200000; // 5 seconds for testing, change to 1200000 for 20 minutes
+const TIMER_DURATION = 1200000; // 20 minutes in milliseconds
 
 let startTime;
 let pausedTime = 0;
@@ -22,16 +22,19 @@ function updateTimer() {
   self.postMessage({type: 'update', time: timeString});
 }
 
+function startTimer() {
+  startTime = Date.now() - pausedTime;
+  timerId = setInterval(updateTimer, 1000);
+}
+
 self.onmessage = function(e) {
   switch(e.data.command) {
     case 'start':
       if (!isPaused) {
-        startTime = Date.now();
-      } else {
-        startTime = Date.now() - pausedTime;
-        isPaused = false;
+        pausedTime = 0;
       }
-      timerId = setInterval(updateTimer, 1000);
+      isPaused = false;
+      startTimer();
       break;
     case 'pause':
       if (!isPaused) {
