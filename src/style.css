@@ -60,6 +60,10 @@ button {
   border: none;
   border-radius: 5px;
   transition: background-color 0.3s;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 button:hover {
@@ -78,9 +82,32 @@ button:disabled {
   text-align: center;
 }
 
+/*
 #notificationToggle {
   margin-top: 20px;
   align-self: center;
+}
+*/
+
+.notification-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.notification-controls button {
+  flex: 1;
+  white-space: nowrap;
+  height: 40px;
+  padding: 0 15px;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
 }
 
 .modal {
