@@ -126,7 +126,7 @@ function resetTimer() {
   updateButtonStates(false, true, true);
   messageModal.style.display = 'none';
   isTimerComplete = false;
-  timerDisplay.textContent = '00:00'; // Ensure the display is reset
+  timerDisplay.textContent = '20:00'; // Ensure the display is reset
 }
 
 function updateButtonStates(startDisabled, pauseDisabled, resetDisabled) {
